@@ -11,27 +11,30 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+
 @Entity
-public class Cohort {
+@Table(name = "AssessmentItem")
+public class AssessmentItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(mappedBy = "cohorts")
-    private Set<Student> students = new HashSet<>();
+    @Column(precision = 10, scale = 2, nullable = false)
+    private double maxPossibleKnowledgeEstimate;
+
+    @Column(nullable = false)
+    private int dataImportance;
 
     @ManyToMany
     @JoinTable(
-        name = "CourseToCohort",
-        joinColumns = @JoinColumn(name = "CohortId"),
-        inverseJoinColumns = @JoinColumn(name = "CourseId")
+        name = "ConceptToAssessmentItem",
+        joinColumns = @JoinColumn(name = "AssessmentItemId"),
+        inverseJoinColumns = @JoinColumn(name = "ConceptId")
     )
-    private Set<Course> courses = new HashSet<>();
+    private Set<ConceptRecord> conceptRecords = new HashSet<>();
 
-    public void setId(int id2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
-    }
+    @ManyToMany(mappedBy = "assessmentItems")
+    private Set<Student> students = new HashSet<>();
 
     // Getters and setters
 }
