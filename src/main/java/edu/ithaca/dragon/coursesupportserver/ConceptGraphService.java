@@ -5,33 +5,39 @@ import com.example.demo.repository.ConceptGraphRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ConceptGraphService {
 
-    @Autowired
-    private ConceptGraphRepository conceptGraphRepository;
+    private final ConceptGraphRepository conceptGraphRepository;
 
-    public List<ConceptGraph> getAllConceptGraphs() {
+    @Autowired
+    public ConceptGraphService(ConceptGraphRepository conceptGraphRepository) {
+        this.conceptGraphRepository = conceptGraphRepository;
+    }
+
+    public List<ConceptGraph> findAll() {
         return conceptGraphRepository.findAll();
     }
 
-    public Optional<ConceptGraph> getConceptGraphById(int id) {
+    public Optional<ConceptGraph> findById(Long id) {
         return conceptGraphRepository.findById(id);
     }
 
-    public ConceptGraph addConceptGraph(ConceptGraph conceptGraph) {
+    public ConceptGraph save(ConceptGraph conceptGraph) {
         return conceptGraphRepository.save(conceptGraph);
     }
 
-    public void deleteConceptGraph(int id) {
+    public ConceptGraph update(ConceptGraph conceptGraph) {
+        return conceptGraphRepository.save(conceptGraph);
+    }
+
+    public void deleteById(Long id) {
         conceptGraphRepository.deleteById(id);
-    }
-
-    public ConceptGraph updateConceptGraph(int id, ConceptGraph conceptGraph) {
-        conceptGraph.setId(id);
-        return conceptGraphRepository.save(conceptGraph);
     }
 }
