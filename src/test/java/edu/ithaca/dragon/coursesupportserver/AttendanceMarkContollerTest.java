@@ -13,6 +13,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import edu.ithaca.dragon.coursesupportserver.hidden.AttendanceMark;
+import edu.ithaca.dragon.coursesupportserver.hidden.AttendanceMarkController;
+import edu.ithaca.dragon.coursesupportserver.hidden.AttendanceMarkRepository;
+
 @WebMvcTest(AttendanceMarkController.class)
 public class AttendanceMarkContollerTest {
     @MockBean

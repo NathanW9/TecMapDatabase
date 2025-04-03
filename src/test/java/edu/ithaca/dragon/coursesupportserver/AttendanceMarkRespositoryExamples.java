@@ -3,6 +3,8 @@ package edu.ithaca.dragon.coursesupportserver;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ithaca.dragon.coursesupportserver.hidden.AttendanceMark;
+
 public class AttendanceMarkRespositoryExamples {
 
     public static List<AttendanceMark> basicTestRepoList(){

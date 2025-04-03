@@ -1,4 +1,4 @@
-package edu.ithaca.dragon.coursesupportserver;
+package edu.ithaca.dragon.coursesupportserver.hidden;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

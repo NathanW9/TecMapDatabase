@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import edu.ithaca.dragon.coursesupportserver.hidden.Cohort;
+
 @Entity
 public class Student {
     @Id

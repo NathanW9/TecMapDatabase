@@ -1,5 +1,6 @@
 package edu.ithaca.dragon.coursesupportserver;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +23,9 @@ public class ConceptToConcept {
     @ManyToOne
     @JoinColumn(name = "ConceptGraphId", nullable = false)
     private ConceptGraph conceptGraph;
+
+     @Column(name = "DataImportance")
+    private double dataImportance;
 
     // Getters and setters
     public ConceptRecord getConcept1() {
@@ -46,5 +50,13 @@ public class ConceptToConcept {
 
     public void setConceptGraph(ConceptGraph conceptGraph) {
         this.conceptGraph = conceptGraph;
+    }
+
+    public double getDataImportance() {
+        return dataImportance;
+    }
+
+    public void setDataImportance(double dataImportance) {
+        this.dataImportance = dataImportance;
     }
 }

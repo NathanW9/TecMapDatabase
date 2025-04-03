@@ -37,4 +37,43 @@ public class AssessmentItem {
     private Set<Student> students = new HashSet<>();
 
     // Getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getMaxPossibleKnowledgeEstimate() {
+        return maxPossibleKnowledgeEstimate;
+    }
+
+    public void setMaxPossibleKnowledgeEstimate(double maxPossibleKnowledgeEstimate) {
+        this.maxPossibleKnowledgeEstimate = maxPossibleKnowledgeEstimate;
+    }
+
+    public int getDataImportance() {
+        return dataImportance;
+    }
+
+    public void setDataImportance(int dataImportance) {
+        this.dataImportance = dataImportance;
+    }
+
+    public Set<ConceptRecord> getConceptRecords() {
+        return conceptRecords;
+    }
+
+    public void setConceptRecords(Set<ConceptRecord> conceptRecords) {
+        this.conceptRecords = conceptRecords;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 }

@@ -1,4 +1,4 @@
-package edu.ithaca.dragon.coursesupportserver;
+package edu.ithaca.dragon.coursesupportserver.hidden;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+
+import edu.ithaca.dragon.coursesupportserver.ConceptGraph;
 
 @Entity
 @Table(name = "Course")

@@ -22,9 +22,6 @@ public class ConceptRecord {
     @Column(length = 100, nullable = false)
     private String label;
 
-    @Column(nullable = false)
-    private int dataImportance;
-
     @ManyToMany
     @JoinTable(
         name = "ConceptToConcept",
@@ -37,4 +34,35 @@ public class ConceptRecord {
     private Set<AssessmentItem> assessmentItems = new HashSet<>();
 
     // Getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public Set<ConceptRecord> getRelatedConcepts() {
+        return relatedConcepts;
+    }
+
+    public void setRelatedConcepts(Set<ConceptRecord> relatedConcepts) {
+        this.relatedConcepts = relatedConcepts;
+    }
+
+    public Set<AssessmentItem> getAssessmentItems() {
+        return assessmentItems;
+    }
+
+    public void setAssessmentItems(Set<AssessmentItem> assessmentItems) {
+        this.assessmentItems = assessmentItems;
+    }
 }

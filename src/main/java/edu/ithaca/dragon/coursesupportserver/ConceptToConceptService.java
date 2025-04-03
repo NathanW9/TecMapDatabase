@@ -21,7 +21,7 @@ public class ConceptToConceptService {
     }
 
     // Method to retrieve a specific ConceptToConcept by its ID (Composite ID)
-    public Optional<ConceptToConcept> findById(Long id) {
+    public Optional<ConceptToConcept> findById(int id) {
         return conceptToConceptRepository.findById(id);
     }
 

@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import edu.ithaca.dragon.coursesupportserver.hidden.AttendanceMark;
+import edu.ithaca.dragon.coursesupportserver.hidden.AttendanceMarkRepository;
+
 @DataJpaTest
 public class AttendanceMarkRepositoryTest {
 
