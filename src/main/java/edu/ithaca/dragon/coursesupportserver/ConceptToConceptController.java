@@ -1,6 +1,5 @@
 package edu.ithaca.dragon.coursesupportserver;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +24,12 @@ public class ConceptToConceptController {
         return conceptToConceptService.findAll();
     }
 
-    // GET a specific ConceptToConcept by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<ConceptToConcept> getConceptToConceptById(@PathVariable Long id) {
-        Optional<ConceptToConcept> conceptToConcept = conceptToConceptService.findById(id);
-        if (conceptToConcept.isPresent()) {
-            return ResponseEntity.ok(conceptToConcept.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    // GET a specific ConceptToConcept by composite ID (ConceptRecord1, ConceptRecord2)
+    @GetMapping("/{concept1Id}/{concept2Id}")
+    public ResponseEntity<ConceptToConcept> getConceptToConceptById(@PathVariable int concept1Id, @PathVariable int concept2Id) {
+        Optional<ConceptToConcept> conceptToConcept = conceptToConceptService.findByConceptIds(concept1Id, concept2Id);
+        return conceptToConcept.map(ResponseEntity::ok)
+                               .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // POST a new ConceptToConcept
@@ -42,10 +38,10 @@ public class ConceptToConceptController {
         return conceptToConceptService.save(conceptToConcept);
     }
 
-    // PUT to update an existing ConceptToConcept
-    @PutMapping("/{id}")
-    public ResponseEntity<ConceptToConcept> updateConceptToConcept(@PathVariable Long id, @RequestBody ConceptToConcept conceptToConcept) {
-        Optional<ConceptToConcept> existingConceptToConcept = conceptToConceptService.findById(id);
+    // PUT to update an existing ConceptToConcept by composite ID
+    @PutMapping("/{concept1Id}/{concept2Id}")
+    public ResponseEntity<ConceptToConcept> updateConceptToConcept(@PathVariable int concept1Id, @PathVariable int concept2Id, @RequestBody ConceptToConcept conceptToConcept) {
+        Optional<ConceptToConcept> existingConceptToConcept = conceptToConceptService.findByConceptIds(concept1Id, concept2Id);
         if (existingConceptToConcept.isPresent()) {
             conceptToConcept.setConceptGraph(existingConceptToConcept.get().getConceptGraph()); // Keep ConceptGraph ID
             ConceptToConcept updated = conceptToConceptService.update(conceptToConcept);
@@ -55,12 +51,12 @@ public class ConceptToConceptController {
         }
     }
 
-    // DELETE a ConceptToConcept by ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteConceptToConcept(@PathVariable Long id) {
-        Optional<ConceptToConcept> existingConceptToConcept = conceptToConceptService.findById(id);
+    // DELETE a ConceptToConcept by composite ID
+    @DeleteMapping("/{concept1Id}/{concept2Id}")
+    public ResponseEntity<Void> deleteConceptToConcept(@PathVariable int concept1Id, @PathVariable int concept2Id) {
+        Optional<ConceptToConcept> existingConceptToConcept = conceptToConceptService.findByConceptIds(concept1Id, concept2Id);
         if (existingConceptToConcept.isPresent()) {
-            conceptToConceptService.deleteById(id);
+            conceptToConceptService.deleteByConceptIds(concept1Id, concept2Id);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

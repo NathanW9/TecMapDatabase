@@ -1,10 +1,5 @@
 package edu.ithaca.dragon.coursesupportserver;
 
-import com.example.demo.entity.ConceptGraph;
-import com.example.demo.repository.ConceptGraphRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,30 +9,32 @@ import java.util.Optional;
 @Service
 public class ConceptGraphService {
 
-    private final ConceptGraphRepository conceptGraphRepository;
+    @Autowired
+    private ConceptGraphRepository conceptGraphRepository;
 
     @Autowired
-    public ConceptGraphService(ConceptGraphRepository conceptGraphRepository) {
-        this.conceptGraphRepository = conceptGraphRepository;
-    }
+    private ConceptRecordRepository conceptRecordRepository;
 
-    public List<ConceptGraph> findAll() {
-        return conceptGraphRepository.findAll();
-    }
+    @Autowired
+    private ConceptToConceptRepository conceptToConceptRepository;
 
-    public Optional<ConceptGraph> findById(Long id) {
-        return conceptGraphRepository.findById(id);
-    }
+    // Fetch the ConceptGraphRecordDTO by conceptGraphId
+    public ConceptGraphRecordDTO getConceptGraphRecord(int conceptGraphId) {
+        // Fetch the concept graph by its ID
+        Optional<ConceptGraph> conceptGraphOptional = conceptGraphRepository.findById(conceptGraphId);
+        if (conceptGraphOptional.isPresent()) {
+            ConceptGraph conceptGraph = conceptGraphOptional.get();
 
-    public ConceptGraph save(ConceptGraph conceptGraph) {
-        return conceptGraphRepository.save(conceptGraph);
-    }
+            // Fetch all concept records related to this concept graph
+            List<ConceptRecord> conceptRecords = conceptRecordRepository.findByConceptGraphId(conceptGraphId);
 
-    public ConceptGraph update(ConceptGraph conceptGraph) {
-        return conceptGraphRepository.save(conceptGraph);
-    }
+            // Fetch all concept-to-concept links related to this concept graph
+            List<ConceptToConcept> conceptToConceptLinks = conceptToConceptRepository.findByConceptGraphId(conceptGraphId);
 
-    public void deleteById(Long id) {
-        conceptGraphRepository.deleteById(id);
+            // Return the DTO containing the concept graph data
+            return new ConceptGraphRecordDTO(conceptGraphId, conceptRecords, conceptToConceptLinks);
+        }
+
+        return null;  // If concept graph not found
     }
 }
