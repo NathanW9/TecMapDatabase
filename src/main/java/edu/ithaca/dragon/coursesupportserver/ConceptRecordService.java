@@ -1,7 +1,5 @@
 package edu.ithaca.dragon.coursesupportserver;
 
-import com.example.demo.entity.ConceptRecord;
-import com.example.demo.repository.ConceptRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

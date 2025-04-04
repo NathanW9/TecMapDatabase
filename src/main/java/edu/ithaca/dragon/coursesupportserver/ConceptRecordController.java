@@ -1,7 +1,5 @@
 package edu.ithaca.dragon.coursesupportserver;
 
-import com.example.demo.entity.ConceptRecord;
-import com.example.demo.service.ConceptRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
